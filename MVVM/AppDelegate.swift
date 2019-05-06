@@ -13,9 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var dependency: AppDependency!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        dependency = dependency ?? CompositionRoot.resolve()
+        dependency.configureSDKs()
+        dependency.configureAppearance()
+        dependency.configurePreferences()
         return true
     }
 
