@@ -65,5 +65,19 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
                 log.error(error, file: file, function: function, line: line)
             })
     }
+    
+    public func mapModel<D: Decodable> (_ type: D.Type,
+                                        file: StaticString = #file,
+                                        function: StaticString = #function,
+                                        line: UInt = #line) -> Single<D> {
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        jsonDecoder.dateDecodingStrategy = .secondsSince1970
+        return self
+            .map(type.self, atKeyPath: nil, using: jsonDecoder, failsOnEmptyData: true)
+            .do(onError: { (error) in
+                log.error(error, file: file, function: function, line: line)
+            })
+    }
 }
 

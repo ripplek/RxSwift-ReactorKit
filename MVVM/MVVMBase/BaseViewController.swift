@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class MVVMViewController: UIViewController {
+class BaseViewController: UIViewController {
     // MARK: - Properties
     
     public lazy private(set) var className: String = {
@@ -82,7 +82,7 @@ class MVVMViewController: UIViewController {
 
 }
 
-extension MVVMViewController: UIGestureRecognizerDelegate {
+extension BaseViewController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let viewControllersCount = navigationController?.viewControllers.count,
             viewControllersCount > 1 {

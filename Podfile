@@ -9,6 +9,7 @@ target 'MVVM' do
   # Pods for MVVM
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxOptional'
   pod 'RxDataSources'
   pod 'MJRefresh'
   pod 'Moya/RxSwift'
