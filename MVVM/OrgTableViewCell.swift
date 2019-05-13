@@ -16,13 +16,8 @@ import Kingfisher
 class OrgTableViewCell: BaseTableViewCell, ReactorKit.View {
     var disposeBag = DisposeBag()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    let imgV = UIImageView()
+    let title = UILabel()
     
     func bind(reactor: OrgTableViewCellReactor) {
         reactor.action.onNext(.org)
@@ -30,10 +25,35 @@ class OrgTableViewCell: BaseTableViewCell, ReactorKit.View {
             .map { $0.org }
             .filterNil()
             .subscribe(onNext: { [weak self] (org) in
-                self?.imageView?.kf.setImage(with: org.avatarUrl)
-                self?.textLabel?.text = org.name
-                self?.detailTextLabel?.text = org.description
+                self?.imgV.kf.setImage(with: org.avatarUrl)
+                self?.title.text = org.name
             })
             .disposed(by: disposeBag)
+    }
+    
+    override func setupSubviews() {
+        imgV
+            .mvvm.adhere(toSuperView: contentView)
+            .mvvm.config({
+                $0.layer.cornerRadius = 5
+                $0.layer.masksToBounds = true
+                $0.contentMode = .scaleAspectFill
+            })
+            .mvvm.layout { (make) in
+                make.centerY.equalToSuperview()
+                make.left.equalTo(10)
+                make.width.height.equalTo(30)
+        }
+        
+        title
+            .mvvm.adhere(toSuperView: contentView)
+            .mvvm.config({
+                $0.font = UIFont.boldSystemFont(ofSize: 20)
+                $0.textColor = UIColor.black
+            })
+            .mvvm.layout { (make) in
+                make.left.equalTo(imgV.snp.right).offset(10)
+                make.centerY.equalToSuperview()
+        }
     }
 }

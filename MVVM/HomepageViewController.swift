@@ -23,6 +23,7 @@ class HomepageViewController: BaseViewController, View {
     private let tableView = UITableView().then {
         $0.registerCellClass(OrgTableViewCell.self)
         $0.rowHeight = 60
+        $0.tableFooterView = UIView()
     }
 
     // MARK: - View Life Circle
