@@ -17,7 +17,7 @@ class HomepageViewController: BaseViewController, View {
     
     // MARK: - Property Private
     private lazy var dataSource = self.dataSourceCreator()
-    private let owners = ["apple"]
+    private let owners = ["apple", "google", "facebook", "instagram"]
     
     // MARK: - UI
     private let tableView = UITableView().then {
@@ -52,6 +52,15 @@ class HomepageViewController: BaseViewController, View {
                 print(s.count)
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        // Interaction
+        tableView.rx.modelSelected(OrgTableViewCellReactor.self)
+            .subscribe(onNext: { [unowned self] (org) in
+                let reposVC = RepoListViewController()
+                reposVC.reactor = RepoListViewReactor(name: org.currentState.org?.name ?? org.currentState.name)
+                self.navigationController?.pushViewController(reposVC, animated: true)
+            })
             .disposed(by: disposeBag)
     }
     

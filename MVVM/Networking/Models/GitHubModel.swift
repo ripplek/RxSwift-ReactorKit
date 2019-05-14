@@ -37,3 +37,6 @@ struct Repo: Codable {
         url = try? container.decodeIfPresent(URL.self, forKey: .url)
     }
 }
+
+extension Repo: Equatable { }
+extension Org: Equatable { }

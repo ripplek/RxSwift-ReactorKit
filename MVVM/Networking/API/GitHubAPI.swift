@@ -16,8 +16,8 @@ enum GitHubAPI {
 extension GitHubAPI: MVVMTargetType {
     var router: Router {
         switch self {
-        case .repos(let username):
-            return .get("/users/\(username)/repos")
+        case .repos(let param):
+            return .get("/users/\(param.username)/repos")
         case .orgs(let orgName):
             return .get("orgs/\(orgName)")
         }

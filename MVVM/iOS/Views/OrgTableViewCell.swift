@@ -16,6 +16,15 @@ import Kingfisher
 class OrgTableViewCell: BaseTableViewCell, ReactorKit.View {
     var disposeBag = DisposeBag()
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let imgV = UIImageView()
     let title = UILabel()
     
@@ -28,7 +37,7 @@ class OrgTableViewCell: BaseTableViewCell, ReactorKit.View {
                 self?.imgV.kf.setImage(with: org.avatarUrl)
                 self?.title.text = org.name
             })
-            .disposed(by: disposeBag)
+            .disposed(by: reuseDisposeBag)
     }
     
     override func setupSubviews() {
