@@ -12,6 +12,7 @@ import RxCocoa
 import ReactorKit
 import RxDataSources
 import MJRefresh
+import SafariServices
 
 class RepoListViewController: BaseViewController, View {
     typealias Section = SectionModel<Void, Repo>
@@ -72,6 +73,18 @@ class RepoListViewController: BaseViewController, View {
         reactor.state.map { $0.status == .reset }
             .filter { $0 }
             .bind(to: tableView.mj_header.rx.endRefresh)
+            .disposed(by: disposeBag)
+        
+        // MARK: - Interactive
+        tableView
+            .rx.modelSelected(Repo.self)
+            .subscribe(onNext: { [unowned self] (repo) in
+                if let url = repo.htmlUrl {
+                    let webVC = SFSafariViewController(url: url)
+                    self.navigationController?
+                        .present(webVC, animated: true, completion: nil)
+                }
+            })
             .disposed(by: disposeBag)
     }
     

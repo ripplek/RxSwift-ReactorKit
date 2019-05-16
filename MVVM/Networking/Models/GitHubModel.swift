@@ -27,6 +27,7 @@ struct Repo: Codable {
     let fullName: String
     let description: String
     let url: URL?
+    let htmlUrl: URL?
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -35,6 +36,7 @@ struct Repo: Codable {
         fullName = try container.decodeIfPresent(String.self, forKey: .fullName) ?? ""
         description = try container.decodeIfPresent(String.self, forKey: .description) ?? ""
         url = try? container.decodeIfPresent(URL.self, forKey: .url)
+        htmlUrl = try? container.decodeIfPresent(URL.self, forKey: .htmlUrl)
     }
 }
 
