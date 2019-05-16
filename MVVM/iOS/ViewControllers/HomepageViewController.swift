@@ -31,9 +31,9 @@ class HomepageViewController: BaseViewController, View {
         super.viewDidLoad()
         title = "MVVM"
         view.backgroundColor = UIColor.white
-        view.addSubview(tableView)
         tableView
-            .snp.makeConstraints({ (make) in
+            .mvvm.adhere(toSuperView: view)
+            .mvvm.layout(snapKitMaker: { (make) in
                 make.edges.equalToSuperview()
             })
     }
@@ -57,8 +57,10 @@ class HomepageViewController: BaseViewController, View {
         // Interaction
         tableView.rx.modelSelected(OrgTableViewCellReactor.self)
             .subscribe(onNext: { [unowned self] (org) in
+                let name = org.currentState.org?.name ?? org.currentState.name
                 let reposVC = RepoListViewController()
-                reposVC.reactor = RepoListViewReactor(name: org.currentState.org?.name ?? org.currentState.name)
+                reposVC.reactor = RepoListViewReactor(name: name)
+                reposVC.title = name
                 self.navigationController?.pushViewController(reposVC, animated: true)
             })
             .disposed(by: disposeBag)
