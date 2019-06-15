@@ -24,7 +24,6 @@ open class BaseCollectionViewCell: UICollectionViewCell {
         self.reuseDisposeBag = DisposeBag()
     }
     
-    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupSubviews()

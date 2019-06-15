@@ -48,9 +48,6 @@ class HomepageViewController: BaseViewController, View {
         // State
         reactor.state.map { $0.section }
             .filterEmpty()
-            .do(onNext: { (s) in
-                print(s.count)
-            })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
@@ -71,9 +68,9 @@ class HomepageViewController: BaseViewController, View {
     }
     
     private func dataSourceCreator() -> RxTableViewSectionedReloadDataSource<Section> {
-        return .init(configureCell: { (ds, tv, ip, e) -> UITableViewCell in
-            let cell = tv.dequeueCell(OrgTableViewCell.self)
-            cell.reactor = e
+        return .init(configureCell: { (dataSource, tableView, indexPath, element) -> UITableViewCell in
+            let cell = tableView.dequeueCell(OrgTableViewCell.self)
+            cell.reactor = element
             return cell
         })
     }

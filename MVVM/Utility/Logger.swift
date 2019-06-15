@@ -14,8 +14,8 @@ extension NSObject {
         let ivars = class_copyIvarList(self.classForCoder, &count)
         print(self.classForCoder, "count:", count)
         var arr: [Any] = []
-        for i in 0..<count {
-            let ivar = ivars![Int(i)]
+        for index in 0..<count {
+            let ivar = ivars![Int(index)]
             let name = ivar_getName(ivar)
             if let name = String(utf8String: name!) {
                 arr.append(name)
@@ -89,8 +89,7 @@ open class Logger {
             DDLog.add($0)
         }
     }
-    
-    
+      
     // MARK: Logging
     
     public func error(
@@ -142,7 +141,6 @@ open class Logger {
         let message = self.message(from: items)
         DDLogVerbose(message, file: file, function: function, line: line)
     }
-    
     
     // MARK: Utils
     

@@ -12,7 +12,9 @@ import RxSwift
 public extension Encodable {
     var dictionary: [String: Any]? {
         guard let data = try? JSONEncoder().encode(self) else { return nil }
-        return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
+        return (try? JSONSerialization
+            .jsonObject(with: data, options: .allowFragments))
+            .flatMap { $0 as? [String: Any] }
     }
 }
 
@@ -38,6 +40,7 @@ public struct CommonableList<T: Codable>: Codable {
     public struct List<T: Codable>: Codable {
         public let list: [T]
         
+        // swiftlint:disable nesting
         private enum CodingKeys: String, CodingKey {
             case list
         }
@@ -80,7 +83,6 @@ extension LogMessage: Equatable {
     
 }
 
-
 public struct NoEvent {}
 
 public protocol ModelType: Codable, Then {
@@ -114,4 +116,3 @@ extension ModelType {
         return stream
     }
 }
-

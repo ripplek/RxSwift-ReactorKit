@@ -1,0 +1,12 @@
+excluded:
+  - Pods
+  - Carthage
+
+disabled_rules:
+  - trailing_whitespace
+
+identifier_name:
+  min_length: # 只有最小长度
+    error: 2 # 只有错误
+  excluded: # 排除某些名字
+    - id

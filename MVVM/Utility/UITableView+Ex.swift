@@ -15,6 +15,7 @@ public func className<T>(_ className: T.Type) -> String {
 extension UITableView {
     
     public func dequeueCell<T: UITableViewCell>(_ cellClass: T.Type) -> T {
+        // swiftlint:disable force_cast
         return dequeueReusableCell(withIdentifier: className(cellClass)) as! T
     }
     

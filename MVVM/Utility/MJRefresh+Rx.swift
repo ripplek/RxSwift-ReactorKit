@@ -27,14 +27,14 @@ public class RxTarget: NSObject, Disposable {  // RxTarget 是 Rxswift 源码
     }
 }
 
-public final class RefreshTarget<Component:MJRefreshComponent>: RxTarget {
+public final class RefreshTarget<Component: MJRefreshComponent>: RxTarget {
     public typealias Callback = MJRefreshComponentRefreshingBlock
     public var callback: Callback?
-    public weak var component:Component?
+    public weak var component: Component?
     
     public let selector = #selector(RefreshTarget.eventHandler)
     
-    public init(_ component: Component,callback:@escaping Callback) {
+    public init(_ component: Component, callback: @escaping Callback) {
         self.callback = callback
         self.component = component
         super.init()
@@ -97,5 +97,3 @@ extension Reactive where Base: MJRefreshFooter {
         })
     }
 }
-
-

@@ -19,11 +19,11 @@ class RepoListViewController: BaseViewController, View {
     
     // MARK: - UI
     
-    private let tableView = UITableView().then { (tv) in
-        tv.registerCellClass(RepoTableViewCell.self)
-        tv.mj_header = MJRefreshNormalHeader()
-        tv.mj_footer = MJRefreshAutoNormalFooter()
-        tv.tableFooterView = UIView()
+    private let tableView = UITableView().then {
+        $0.registerCellClass(RepoTableViewCell.self)
+        $0.mj_header = MJRefreshNormalHeader()
+        $0.mj_footer = MJRefreshAutoNormalFooter()
+        $0.tableFooterView = UIView()
     }
     
     // MARK: - Property Private
@@ -89,12 +89,11 @@ class RepoListViewController: BaseViewController, View {
     }
     
     private func dataSourceCreator() -> RxTableViewSectionedReloadDataSource<Section> {
-        return .init(configureCell: { (ds, tv, ip, e) -> UITableViewCell in
-            let cell = tv.dequeueCell(RepoTableViewCell.self)
-            cell.textLabel?.text = e.name
-            cell.detailTextLabel?.text = e.description
+        return .init(configureCell: { (_, tableView, indexPath, element) -> UITableViewCell in
+            let cell = tableView.dequeueCell(RepoTableViewCell.self)
+            cell.textLabel?.text = element.name
+            cell.detailTextLabel?.text = element.description
             return cell
         })
     }
 }
-

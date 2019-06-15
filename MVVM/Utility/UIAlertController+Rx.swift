@@ -26,8 +26,7 @@ extension UIAlertController {
         message: String?,
         style: UIAlertController.Style,
         actions: [AlertAction])
-        -> Observable<Int>
-    {
+        -> Observable<Int> {
         return Observable.create { observer in
             let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
             
@@ -46,4 +45,3 @@ extension UIAlertController {
     }
     
 }
-

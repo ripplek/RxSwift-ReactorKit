@@ -51,6 +51,7 @@ public extension Reactive where Base: UIViewController {
         return ControlEvent(events: source)
     }
     
+    // swiftlint:disable line_length
     /// Rx observable, triggered when the ViewController appearance state changes (true if the View is being displayed, false otherwise)
     var isVisible: Observable<Bool> {
         let viewDidAppearObservable = self.base.rx.viewDidAppear.map { _ in true }
@@ -66,4 +67,3 @@ public extension Reactive where Base: UIViewController {
     
 }
 #endif
-

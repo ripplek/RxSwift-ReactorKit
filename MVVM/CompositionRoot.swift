@@ -32,8 +32,7 @@ public final class CompositionRoot {
                              configurePreferences: self.configurePreferences
         )
     }
-    
-    
+     
     /// ConfigureSDKs for App
     static func configureSDKs() {
         
@@ -49,5 +48,3 @@ public final class CompositionRoot {
         
     }
 }
-
-

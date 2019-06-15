@@ -47,7 +47,7 @@ extension MVVMTargetType {
         return Data()
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         return ["Content-Type": "application/json"]
     }
 }

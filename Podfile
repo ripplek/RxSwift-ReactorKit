@@ -5,7 +5,8 @@ inhibit_all_warnings!
 target 'MVVM' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
+  
+  pod 'SwiftLint'
   # Pods for MVVM
   pod 'RxSwift'
   pod 'RxCocoa'

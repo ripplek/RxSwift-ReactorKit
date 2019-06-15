@@ -80,4 +80,3 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
             })
     }
 }
-
