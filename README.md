@@ -1,4 +1,4 @@
-# RxSwift-MVVM
+# RxSwift-ReactorKit
 
 这个项目是入坑[RxSwift](https://github.com/ReactiveX/RxSwift)以来的一些收获，历经多个真实项目的实践。我也一直在为写出简洁易懂的代码而努力学习和实践，当中难免有不足之处希望得到社区开源爱好者的指点，期待在与你的探讨中也能获得一些收获
 
@@ -42,14 +42,14 @@
 	```
 
 - **Utility 通用工具集合**
-- **MVVMBase 项目基类**
+- **ReactorKitBase 项目基类**
 - **Networking 网络层封装**
 
 	```swift
 	/*
 	 service
 	 	⏬
-	 API(MVVMTargetType)
+	 API(ReactorKitTargetType)
 	 	⏬
 	 Moya(TargetType)
 	*/ 
@@ -62,8 +62,8 @@
 
 	```swift
 		tableView
-            .mvvm.adhere(toSuperView: view)
-            .mvvm.layout(snapKitMaker: { (make) in
+            .ReactorKit.adhere(toSuperView: view)
+            .ReactorKit.layout(snapKitMaker: { (make) in
                 make.edges.equalToSuperview()
             })
 	```
